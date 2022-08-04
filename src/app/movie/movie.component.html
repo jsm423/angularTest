@@ -13,20 +13,20 @@
             <td>개봉날짜</td>
             <td>평점</td>
             <td>감독</td>
-        </tr>
-        <tr *ngFor="let movie of movies">
+        </tr>                                                
+        <tr *ngFor="let movie of movies">       <!-- <1> -->
             <td>{{movie.movieName}}</td>
             <td>{{movie.date}}</td>
             <td>{{movie.rating}}</td>
             <td>{{movie.director}}</td>
         </tr>
-        <!-- <tr>
+        <!-- <tr>                                <2>
             <td>{{movie.movieName}}</td>
             <td>{{movie.date}}</td>
             <td>{{movie.rating}}</td>
             <td>{{movie.director}}</td>
         </tr> -->
-        <!-- <tr *ngFor="let list of data">
+        <!-- <tr *ngFor="let list of data">      <3>
             <td>{{list.movieName}}</td>
             <td>{{list.date}}</td>
             <td>{{list.rating}}</td>

@@ -9,9 +9,9 @@ import { Movies } from '../movieData';
 })
 export class MovieComponent implements OnInit {
 
-  movies = Movies;
+  movies = Movies;                        //<1>
 
-  // movie: Movie = {
+  // movie: Movie = {                     //<2>
   //   movieName : '영화1',
   //   date : '2022-07-01',
   //   rating : '4.5',
@@ -19,7 +19,7 @@ export class MovieComponent implements OnInit {
   // };
 
   //  title = 'movie';
-  //  data=[
+  //  data=[                               //<3>               
   //   {movieName: "영화1", date: "2022-07-01", rating: "5.0",director:"감독1"},
   //   {movieName: "영화2", date: "2022-07-02", rating: "1.0",director:"감독2"},
   //   {movieName: "영화3", date: "2022-07-03", rating: "4.0",director:"감독3"},
