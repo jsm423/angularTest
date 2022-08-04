@@ -1,0 +1,14 @@
+*{margin: 0; padding: 0;}
+.movieTable{
+    margin: 0 auto;
+    width: 300px;
+    border: 1px solid black;
+    text-align: center;
+    border-collapse: collapse;
+}
+.movieTable tr:first-child{
+    background-color: lightgoldenrodyellow;
+}
+.movieTable tr td{
+    border: 1px solid black;
+}
