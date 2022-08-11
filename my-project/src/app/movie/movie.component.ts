@@ -24,7 +24,8 @@ export class MovieComponent implements OnInit {
   getData(){
     this.datas = this.http.get(this.url+'/movie')
   }
-  getSearchData(){      
+  getSearchData(){    
+
     console.log(this.searchType, this.keyword)
     this.datas = this.http.get(this.url+'/search?searchType='+this.searchType+'&keyword='+this.keyword)    
   }
