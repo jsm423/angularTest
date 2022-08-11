@@ -14,9 +14,9 @@ export class MovieComponent implements OnInit {
   url = "http://127.0.0.1:5000";
 
   datas : any;
-  searchType : any;
+  searchType : any = "movieName";
   keyword : any;
-  sort : any;
+  sort : any = "desc";
   
 
   constructor(private http: HttpClient){ }  

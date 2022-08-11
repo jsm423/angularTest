@@ -25,23 +25,27 @@
     </table>
     <div class="formDiv">
         <div>
-            <form action="/search" method="GET">
+            <!-- <form action="/sort" method="GET">  -->
                 <select name="searchType" id="searchType" [(ngModel)]="searchType">
                     <option value="movieName">제목</option>
                     <option value="director">감독</option>
                 </select>
                 <input type="search" name="keyword" id="keyword" [(ngModel)]="keyword">
-                <button id="searchBtn" (click)="getSearchData()" type="button">검색</button>
-            </form>   
+                <button id="searchBtn" (click)="getSearchData()" type="button">검색</button>  
+                <!-- </form> -->
         </div>
         
         <div>
-            <form action="/sort" method="GET">
-                <select name="sort" id="sort" (change)="getSortData()" [(ngModel)]="sort">
+                <!--<form action="/sort" method="GET"> 
+                    <select name="sort" id="sort" (change)="getSortData()" [(ngModel)]="sort">
                     <option value="desc">평점 높은순</option>
                     <option value="asc">평점 낮은순</option>
                 </select>
-            </form>
+            </form> -->
+                <select name="sort" id="sort" (ngModelChange)="getSortData()" [(ngModel)]="sort">
+                    <option value="desc">평점 높은순</option>
+                    <option value="asc">평점 낮은순</option>
+                </select>
         </div>
     </div>
 
