@@ -1,12 +1,15 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
+from flask_cors import CORS
 import cx_Oracle
+
 
 dsn = cx_Oracle.makedsn("localhost", 1521, service_name = "XE")
 connection = cx_Oracle.connect(user="jo", password="sumin", dsn=dsn, encoding="UTF-8")
 
 app = Flask(__name__)
+CORS(app)
 
-@app.route('/movie')
+@app.route('/movie', methods = ['GET'])
 def movie():    
     cursor = connection.cursor()
     sql = "select movieName, to_char(releaseDate,'yyyy-mm-dd') as releasedate, rating, director from movie"
