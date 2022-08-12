@@ -34,7 +34,7 @@ def movie():
     cursor = db.cursor(MySQLdb.cursors.DictCursor)
     for mName in result:
         sql = f"insert into movie(movieName) values ('{mName.get_text()}')"
-        cursor.execute(sql) 
+        cursor.execute(sql)
     db.commit()
     data_list = cursor.fetchall()
     return jsonify(data_list)
