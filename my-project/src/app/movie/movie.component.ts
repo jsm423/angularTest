@@ -12,11 +12,11 @@ import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 export class MovieComponent implements OnInit {
 
   url = "http://127.0.0.1:5000";
-
+  crawlingUrl = "http://127.0.0.1:5010";
   datas : any;
-  searchType : any;
+  searchType : any = "movieName";
   keyword : any;
-  sort : any;
+  sort : any = "desc";
   
 
   constructor(private http: HttpClient){ }  
@@ -33,6 +33,10 @@ export class MovieComponent implements OnInit {
     console.log(this.sort)
     this.datas = this.http.get(this.url+'/sort?sort='+this.sort)
   }
+  getCrawlingData(){
+    this.datas = this.http.get(this.crawlingUrl+'/crawling')
+  }
+
   ngOnInit(): void {
     this.datas = this.http.get(this.url+'/movie')
   }
