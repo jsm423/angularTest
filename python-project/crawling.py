@@ -21,13 +21,15 @@ app = Flask(__name__)
 CORS(app)
 
 
-url = 'https://movie.naver.com/#none'
+url = 'https://movie.naver.com/movie/running/current.naver?view=list&tab=normal&order=open'
 headers = {'Content-Type': 'application/json; charset=utf-8'}
 response = requests.get(url, headers=headers)
 
 soup = BeautifulSoup(response.text, "html.parser")
 
-result = soup.select('a._select_title_anchor strong')
+result = soup.select('#content > div.article > div > div.lst_wrap > ul > li > dl > dt > a')
+# for i in result:
+#     print(i.get_text())
 
 @app.route('/crawling')
 def crawling():    
