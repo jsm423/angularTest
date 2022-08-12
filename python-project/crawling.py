@@ -32,9 +32,11 @@ result = soup.select('a._select_title_anchor strong')
 @app.route('/crawling')
 def movie():    
     cursor = db.cursor(MySQLdb.cursors.DictCursor)
+
     for mName in result:
         sql = f"insert into movie(movieName) values ('{mName.get_text()}')"
         cursor.execute(sql)
+        
     db.commit()
     data_list = cursor.fetchall()
     return jsonify(data_list)
