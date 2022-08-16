@@ -1,3 +1,5 @@
+import requests
+from bs4 import BeautifulSoup
 from flask import Flask, render_template, request, jsonify
 from flask_cors import CORS
 
@@ -45,6 +47,26 @@ def sort():
     cursor.execute(sql)
     sort_list = cursor.fetchall()
     return jsonify(sort_list)
+
+
+url = 'https://movie.naver.com/movie/running/current.naver?view=list&tab=normal&order=open'
+headers = {'Content-Type': 'application/json; charset=utf-8'}
+response = requests.get(url, headers=headers)
+
+soup = BeautifulSoup(response.text, "html.parser")
+
+result = soup.select('#content > div.article > div > div.lst_wrap > ul > li > dl > dt > a')
+@app.route('/crawling')
+def crawling():    
+    cursor = db.cursor(MySQLdb.cursors.DictCursor)
+
+    for mName in result:
+        sql = f"insert into movie(movieName) values ('{mName.get_text()}')"
+        cursor.execute(sql)
+
+    db.commit()
+    data_list = cursor.fetchall()
+    return jsonify(data_list)
 
  
 if __name__ == "__main__":
