@@ -5,12 +5,11 @@ h3{
 }
 .movieTable{
     margin: 0 auto;
-    width: 600px;
+    
     border: 1px solid black;
     text-align: center;
     border-collapse: collapse;
 }
-
 .movieTable tr:first-child{
     background-color: lightgoldenrodyellow;
 }

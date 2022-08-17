@@ -33,9 +33,7 @@ export class MovieComponent implements OnInit {
     console.log(this.sort)
     this.datas = this.http.get(this.url+'/sort?sort='+this.sort)
   }
-  getCrawlingData(){
-    this.datas = this.http.get(this.crawlingUrl+'/crawling')
-  }
+  
 
   ngOnInit(): void {
     this.datas = this.http.get(this.url+'/movie')

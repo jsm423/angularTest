@@ -52,16 +52,38 @@ def sort():
 url = 'https://movie.naver.com/movie/running/current.naver?view=list&tab=normal&order=open'
 headers = {'Content-Type': 'application/json; charset=utf-8'}
 response = requests.get(url, headers=headers)
-
 soup = BeautifulSoup(response.text, "html.parser")
 
-result = soup.select('#content > div.article > div > div.lst_wrap > ul > li > dl > dt > a')
+title = soup.select('#content > div.article > div > div.lst_wrap > ul > li > dl > dt > a')
+rating = soup.select('#content > div.article > div > div.lst_wrap > ul > li > dl > dd.star > dl > dd > div > a > span.num')
+director = soup.select('#content > div.article > div > div.lst_wrap > ul > li > dl > dd:nth-child(3) > dl > dd:nth-child(4) > span > a')
+releaseDate = soup.select('#content > div.article > div > div.lst_wrap > ul > li > dl > dd:nth-child(3) > dl > dd:nth-child(2) > span:nth-child(3)')
+
+titles = []
+ratings = []
+directors = []
+dates = []
+
+for t in title:
+    titles.append(t.get_text())
+
+for r in rating:
+    ratings.append(r.get_text())
+
+for d in director:
+    directors.append(d.get_text())
+
+for rd in releaseDate:
+    dates.append(rd.next_sibling.strip().split(" ")[0])
+
+datas = [data for data in zip(titles,ratings,directors,dates)]
+
 @app.route('/crawling')
 def crawling():    
     cursor = db.cursor(MySQLdb.cursors.DictCursor)
-
-    for mName in result:
-        sql = f"insert into movie(movieName) values ('{mName.get_text()}')"
+    
+    for data in datas:
+        sql = f"insert into movie(movieName, rating, director, releaseDate) values('{data[0]}','{data[1]}','{data[2]}','{data[3]}')"
         cursor.execute(sql)
 
     db.commit()
